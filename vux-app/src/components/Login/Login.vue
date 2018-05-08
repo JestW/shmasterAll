@@ -1,48 +1,63 @@
 <template>
-  <div>
-   <div class="login" style="width:80%;margin:50% auto">
-     <group title="登陆界面" >
+  <div  class="login">
+   <div style="width:90%;margin:50% auto">
+     <group>
        <x-input
-         title="姓名"
-         is-type="china-mobile"
-         style="border: 1px solid #ccc;border-top-left-radius: 5px;border-top-right-radius: 5px; border-bottom: none;background-color: azure;"
+         title="手机号码"
+         labelWidth="70px"
+         name="mobile"
          :max="11"
+         placeholder="请输入手机号码"
+         keyboard="number"
+         is-type="china-mobile"
          text-align="left"
-         placeholder="请输入姓名"
        ></x-input>
+     </group>
+     <group>
        <x-input
          title="密码"
-         style="border: 1px solid #ccc;background-color: azure;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px; " name="username"
-         type="password"
-         text-align="left"
+         labelWidth="70px"
+         name="password"
          placeholder="请输入密码"
+         keyboard="password"
+         is-type="number"
+         text-align="left"
        ></x-input>
-       <!--<x-button @click.native="style = 'color:red;'" type="primary">set red</x-button>-->
+     </group>
+     <group>
        <x-button
          type="primary"
          style="margin-top: 2px;"
-         action-type="button"
+         @click.native="doLogin"
        >submit</x-button>
      </group>
    </div>
   </div>
 </template>
 <script>
-import { XInput, Group, XButton, Cell } from 'vux'
+import { XInput, Group, XButton } from 'vux'
+// import axios from 'axios'
 export default {
   name: 'Login',
   components: {
     XInput,
     XButton,
-    Group,
-    Cell
+    Group
   },
   data () {
     return {
+      mobile: '',
+      password: '',
       msg: 'Welcome to Vue'
+    }
+  },
+  mounted: {
+    doLogin () {
+      debugger
     }
   }
 }
+
 </script>
 
 <style scoped>

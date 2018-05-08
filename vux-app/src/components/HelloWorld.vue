@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <group title="set is-type=china-name">
+    <group title="123">
       <x-input title="姓名" name="username" placeholder="请输入姓名"></x-input>
     </group>
   </div>
