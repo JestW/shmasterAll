@@ -12,7 +12,7 @@ import Demo from '@/components/Common/Demo/Demo'
 import Demo2 from '@/components/Common/Demo/Demo2'
 import Demo5 from '@/components/Common/Demo/Demo5'
 import Demo6 from '@/components/Common/Demo/Demo6'
-import Test from '@/components/Test/Test'
+// import Test from '@/components/Test/Test'
 Vue.use(Router)
 
 export default new Router({
@@ -82,15 +82,15 @@ export default new Router({
       component: Demo6
     },
     {
-      path: '/test',
-      name: 'Test',
-      component: Test
+      path: '/test3',
+      name: 'Test3',
+      component: resolve => require(['../components/Test/Test3'], resolve)
     },
-    {
-      path: '/empList',
-      name: 'EmpList',
-      component: resolve => require(['../components/Employee/EmpList'], resolve)
-    },
+    // {
+    //   path: '/empList',
+    //   name: 'EmpList',
+    //   component: resolve => require(['../components/Employee/EmpList'], resolve)
+    // },
     {
       path: '/empAtt',
       name: 'EmpAttendance',
@@ -110,6 +110,20 @@ export default new Router({
       path: '/empDist',
       name: 'EmpDistribution',
       component: resolve => require(['../components/Employee/EmpDistribution'], resolve)
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: resolve => require(['../components/Test/Test'], resolve),
+      direction: '/test/test2',
+      children:[
+        {
+          path: '/test/test2',
+          name: 'Test2',
+          component: resolve => require(['../components/Test/Test2'], resolve)
+        }
+      ]
     }
+
   ]
 })

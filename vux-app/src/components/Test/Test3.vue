@@ -1,18 +1,23 @@
 <template>
   <div>
-    this is test111
-    <router-view v-bind:id='id'></router-view>
+    <Public
+      :id='data.id'
+    ></Public>
   </div>
 </template>
 
 <script>
+import Public from '../Common/Public'
 export default {
-  name: 'Test',
+  name: 'Test3',
   components: {
+    Public
   },
   data () {
     return {
-      id: 123456
+      data: {
+        id: 123456
+      }
     }
   }
 }
