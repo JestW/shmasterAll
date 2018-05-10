@@ -3,10 +3,11 @@
 import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
+import './app.css'
 // import extra from './extra'
 import store from './store'
 import router from './router'
-import Icon from 'vue-awesome/components/Icon'
+// import Icon from 'vue-awesome/components/Icon'
 import Vuex from 'vuex'
 import { sync } from 'vuex-router-sync'
 // import es6-promise from 'es6-promise'
@@ -31,7 +32,7 @@ Vue.use(DatetimePlugin)
 Vue.config.productionTip = false
 Vue.use(Vuex)
 
-Vue.component('icon', Icon)
+// Vue.component('icon', Icon)
 /* eslint-disable no-new */
 
 // 需要注意的是axios是基于Promise的，因此如果你需要兼容低版本浏览器(caniuse)，需要引入polyfill。Polyfill 推荐使用 es6-promise
@@ -52,7 +53,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  // extra,
   components: { App },
   template: '<App/>'
 })

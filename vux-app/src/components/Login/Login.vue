@@ -1,65 +1,52 @@
 <template>
-  <div  class="login">
-   <div style="width:90%;margin:50% auto">
-     <group>
-       <x-input
-         title="手机号码"
-         labelWidth="70px"
-         name="mobile"
-         :max="11"
-         placeholder="请输入手机号码"
-         keyboard="number"
-         is-type="china-mobile"
-         text-align="left"
-       ></x-input>
-     </group>
-     <group>
-       <x-input
-         title="密码"
-         labelWidth="70px"
-         name="password"
-         placeholder="请输入密码"
-         keyboard="password"
-         is-type="number"
-         text-align="left"
-       ></x-input>
-     </group>
-     <group>
-       <x-button
-         type="primary"
-         style="margin-top: 2px;"
-         @click.native="doLogin"
-       >submit</x-button>
-     </group>
-   </div>
+<div style="margin-top: 50%">
+  <div style="width:90%; margin: auto">
+    <group>
+      <x-input
+        title="手机号码"
+        label-width="100px"
+        name="mobile"
+        placeholder="请输入手机号码"
+        keyboard="number"
+        :max="11"
+        is-type="china-mobile"></x-input>
+    </group>
+    <group>
+      <x-input
+        title="密码"
+        label-width="100px"
+        name="password"
+        placeholder="请输入密码"
+        keyboard="number"
+        is-type="china-mobile"></x-input>
+    </group>
+    <group>
+      <x-button
+        type="primary"
+        style="margin-top: 2px;"
+        @click.native="onlogin"
+      >submit</x-button>
+    </group>
   </div>
+</div>
 </template>
+
 <script>
-import { XInput, Group, XButton } from 'vux'
-// import axios from 'axios'
+import { XButton, Group, XInput } from 'vux'
 export default {
   name: 'Login',
   components: {
-    XInput,
     XButton,
-    Group
+    Group,
+    XInput
   },
-  data () {
-    return {
-      mobile: '',
-      password: '',
-      msg: 'Welcome to Vue'
-    }
-  },
-  mounted: {
-    doLogin () {
-      debugger
+  methods: {
+    onlogin () {
+      console.log(0)
+      this.$router.push('./home')
     }
   }
 }
-
 </script>
-
 <style scoped>
-
 </style>

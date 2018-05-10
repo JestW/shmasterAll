@@ -12,6 +12,7 @@ import Demo from '@/components/Common/Demo/Demo'
 import Demo2 from '@/components/Common/Demo/Demo2'
 import Demo5 from '@/components/Common/Demo/Demo5'
 import Demo6 from '@/components/Common/Demo/Demo6'
+import Test from '@/components/Test/Test'
 Vue.use(Router)
 
 export default new Router({
@@ -76,9 +77,39 @@ export default new Router({
       component: Demo5
     },
     {
-      path: '/demo6',
+      path: '/Demo6',
       name: 'Demo6',
       component: Demo6
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: Test
+    },
+    {
+      path: '/empList',
+      name: 'EmpList',
+      component: resolve => require(['../components/Employee/EmpList'], resolve)
+    },
+    {
+      path: '/empAtt',
+      name: 'EmpAttendance',
+      component: resolve => require(['../components/Employee/EmpAttendance'], resolve)
+    },
+    {
+      path: '/empReport',
+      name: 'EmpReport',
+      component: resolve => require(['../components/Employee/EmpReport'], resolve)
+    },
+    {
+      path: '/empSub',
+      name: 'EmpSubstitute',
+      component: resolve => require(['../components/Employee/EmpSubstitute'], resolve)
+    },
+    {
+      path: '/empDist',
+      name: 'EmpDistribution',
+      component: resolve => require(['../components/Employee/EmpDistribution'], resolve)
     }
   ]
 })

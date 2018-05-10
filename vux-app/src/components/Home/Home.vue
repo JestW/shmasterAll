@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 50%;">
     <grid>
-      <grid-item link="/employee" :label="'人员'">
+      <grid-item link="/emplist" :label="'人员'">
         <img slot="icon" src="../../assets/grid_icon.png">
       </grid-item>
       <grid-item link="/machine" :label="'机器'">
