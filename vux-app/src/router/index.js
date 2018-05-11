@@ -86,11 +86,16 @@ export default new Router({
       name: 'Test3',
       component: resolve => require(['../components/Test/Test3'], resolve)
     },
-    // {
-    //   path: '/empList',
-    //   name: 'EmpList',
-    //   component: resolve => require(['../components/Employee/EmpList'], resolve)
-    // },
+    {
+      path: '/test4',
+      name: 'Test4',
+      component: resolve => require(['../components/Test/Test4'], resolve)
+    },
+    {
+      path: '/empList',
+      name: 'EmpList',
+      component: resolve => require(['../components/Employee/EmpList'], resolve)
+    },
     {
       path: '/empAtt',
       name: 'EmpAttendance',
@@ -107,9 +112,9 @@ export default new Router({
       component: resolve => require(['../components/Employee/EmpSubstitute'], resolve)
     },
     {
-      path: '/empDist',
-      name: 'EmpDistribution',
-      component: resolve => require(['../components/Employee/EmpDistribution'], resolve)
+      path: '/bindEve',
+      name: 'BindEvent',
+      component: resolve => require(['../components/Test/BindEvent'], resolve)
     },
     {
       path: '/test',

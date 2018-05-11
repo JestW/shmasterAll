@@ -25,7 +25,7 @@
 </template>
 <script>
 import { Grid, GridItem, GroupTitle, dateFormat } from 'vux'
-import { getServer } from '../../net/axios'
+// import { getServer } from '../../net/axios'
 // import axios from 'axios'
 // import { ERR_OK } from '../../net/config'
 // function findUrl (name, serviceList) {
@@ -48,19 +48,19 @@ export default {
     GroupTitle
   },
   created () {
-    this.__getServer()
+    // this.__getServer()
   },
   methods: {
     onItemClick () {
       console.log('on item click')
     },
-    __getServer () {
-      getServer('Login', {
-        CorpID: 12,
-        pwd: 9999,
-        userName: 13899999999
-      })
-    }
+    // __getServer () {
+    //   getServer('Login', {
+    //     CorpID: 12,
+    //     pwd: 9999,
+    //     userName: 13899999999
+    //   })
+    // }
   }
   // _getDiscList () {
   //   getService().then((res) => {

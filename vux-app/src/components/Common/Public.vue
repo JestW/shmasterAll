@@ -1,20 +1,12 @@
 <template>
   <div>
-    this is a public template
-    {{ id }}
     <x-table style="background-color:#fff;">
       <thead>
       </thead>
       <tbody>
-        <tr class="slist-cell" v-for="(item) in Slist">
-          <td></td>
-          <td></td>
-        </tr>
-      </tbody>
-      <tbody>
-        <tr class="slist-cell" v-for="item in HList">
-          <td></td>
-          <td></td>
+        <tr v-for="item in data" class="slist-cell">
+          <td style="width:50px;" v-if="!!val" v-html="item.val"></td>
+          <td v-if="typeof(item) === 'object' || item.length === 1">{{ item[0].title }}</td>
         </tr>
       </tbody>
     </x-table>
@@ -33,17 +25,18 @@ export default {
       type: Number,
       required: true
     },
-    HList: {
-      type: Array,
-      required: true
+    increase: {
+      type: Function
+    },
+    data: {
+      type: Array
     }
   },
   methods: {
-    te () {
-      return 11
-    }
+
   }
 }
+
 </script>
 <style scoped>
 </style>
