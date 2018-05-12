@@ -1,12 +1,19 @@
 <template>
   <div>
-    <x-table style="background-color:#fff;">
-      <thead>
-      </thead>
+    <div v-for="(item, key) in data"></div>
+    <x-table  style="background-color:#fff;">
       <tbody>
-        <tr v-for="item in data" class="slist-cell">
-          <td style="width:50px;" v-if="!!val" v-html="item.val"></td>
-          <td v-if="typeof(item) === 'object' || item.length === 1">{{ item[0].title }}</td>
+        <!--<tr>-->
+          <!--<td>{{ key }}</td>-->
+          <!--<td>{{ key }}</td>-->
+        <!--</tr>-->
+        <tr v-for="(row, index) in rows" class="slist-cell">
+          <!--<td>{{index}}</td>-->
+          <td style="width: 100px;" v-html="row.field"></td>
+          <!--<td>{{item[row.name]}}</td>-->
+          <td v-for = "(val, key) in noEmptyData">
+            <span>{{ val[row.name] ? val[row.name] : val[row.name] !== 0 ? ' ': 0 }}</span>
+          </td>
         </tr>
       </tbody>
     </x-table>
@@ -21,19 +28,33 @@ export default {
     XTable
   },
   props: {
-    id: {
-      type: Number,
-      required: true
-    },
-    increase: {
-      type: Function
-    },
     data: {
-      type: Array
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    rows: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+    // noEmptyData: {
+    //   type: Array,
+    //   default: function () {
+    //     return []
+    //   }
+    // }
+  },
+  computed: {
+    noEmptyData () {
+      // debugger
+      // return this.data && this.data.length ? this.data : [{}]
+      return this.data && this.data.length ? this.data : [{}]
     }
   },
   methods: {
-
   }
 }
 
