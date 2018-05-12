@@ -1,20 +1,40 @@
 <template>
-  <div>
-    <x-table  style="background-color:#fff;">
+  <div style="width: 100%">
+    <x-table  style="width:auto; background-color:#fff; overflow: hidden">
+      <thead>
+        <tr>
+          <th style="padding: 5px 10px;" v-for="row in rows"><span>{{ row.field }}</span></th>
+        </tr>
+      </thead>
       <tbody>
-      <tr>
-        <td>{{ title }}</td>
-        <td>
-          <span></span>
-        </td>
-      </tr>
+        <!--<tr>-->
+          <!--<td v-for="item in data">{{ item.name }}</td>-->
+        <!--</tr>-->
       </tbody>
     </x-table>
   </div>
 </template>
 <script>
+import { XTable } from 'vux'
 export default {
-  name: 'JTable'
+  name: 'JTable',
+  components: {
+    XTable
+  },
+  props: {
+    data: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    rows: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  }
 }
 </script>
 
