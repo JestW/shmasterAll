@@ -1,17 +1,17 @@
 <template>
   <div>
-    <div v-for="(item, key) in data"></div>
-    <x-table  style="background-color:#fff;">
+    <div v-for="(item) in data"></div>
+    <x-table  style="background-color:#fff;border-top:none">
       <tbody>
         <!--<tr>-->
           <!--<td>{{ key }}</td>-->
           <!--<td>{{ key }}</td>-->
         <!--</tr>-->
-        <tr v-for="(row, index) in rows" class="slist-cell">
+        <tr v-for="(row) in rows" class="slist-cell">
           <!--<td>{{index}}</td>-->
           <td style="width: 100px;" v-html="row.field"></td>
           <!--<td>{{item[row.name]}}</td>-->
-          <td v-for = "(val, key) in noEmptyData">
+          <td v-for = "(val) in noEmptyData" style="text-align: left">
             <span>{{ val[row.name] ? val[row.name] : val[row.name] !== 0 ? ' ': 0 }}</span>
           </td>
         </tr>
@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     noEmptyData () {
-      return this.data && this.data.length ? this.data : [{}]
+      return this.data ? this.data : [{}]
     }
   },
   methods: {
@@ -52,4 +52,10 @@ export default {
 
 </script>
 <style scoped>
+  .slist-cell:first-child{
+    border-top: none;
+  }
+  .vux-table:after{
+    border-top:none
+  }
 </style>

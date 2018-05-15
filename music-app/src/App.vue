@@ -10,7 +10,10 @@
       <tab-item @on-item-click="$router.push('/rank')">排行</tab-item>
       <tab-item @on-item-click="$router.push('/search')">搜索</tab-item>
     </tab>
-    <router-view/>
+    <!--keep-alive 防止每次进去都会请求一遍请求-->
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 <script>

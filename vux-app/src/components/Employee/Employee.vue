@@ -175,10 +175,9 @@ export default {
             // _this.workInfo = (content.UserShifs || [])
             _this.workInfo = (content.UserShifs || [])
               .map(x => {
-                x.signIn = x.signIn ? x.signIn.split(' ')[1] : '暂无'
-                x.signOut = x.signOut ? x.signOut.split(' ')[1] : '暂无'
+                x.SignIn = x.SignIn ? x.SignIn.split(' ')[1] : '暂无'
+                x.SignOut = x.SignOut ? x.SignOut.split(' ')[1] : '暂无'
                 // let arr = [...x.signIn]
-                debugger
                 return x
               })
             // if (content.UserShifs) {

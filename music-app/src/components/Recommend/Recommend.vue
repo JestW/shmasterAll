@@ -1,50 +1,53 @@
 <template>
 <div style="color:#fff">
-  <swiper loop auto
-    :list="demo06_list"
-    :index="demo06_index"
-    @on-index-change="demo06_onIndexChange"></swiper>
+  <swiper>
+    <swiper-item
+      dots-position="center"
+      class="swiper-demo-img"
+      v-for="(item, index) in recommends"
+      :key="index"><a :href="item.linkUrl"><img style="width: 100%" :src="item.picUrl"></a></swiper-item>
+  </swiper>
+  <p>this is recommend</p>
 </div>
 </template>
-
 <script>
-import { Swiper } from 'vux'
-import {getRecommend} from '../../api/recommend'
+import { Swiper, SwiperItem } from 'vux'
+import {getRecommend, getDiscList} from '../../api/recommend'
 import {ERR_OK} from '../../api/config'
 export default {
   data () {
     return {
-      demo06_index: {}
+      recommends: {},
     }
   },
   components: {
-    Swiper
+    Swiper,
+    SwiperItem
   },
   methods: {
+
     _getRecommend () {
       getRecommend().then((res) => {
         if (res.code === ERR_OK) {
-          const content = res.data.slider
-          console.log(content)
-          // demo06_index = {}d
-          debugger
-          this.demo06_index = (content || []).map(item => {
-            item.url = item.linkUrl
-            return item
-          })
+          this.recommends = res.data.slider
+          console.log(this.recommends)
         }
       })
     },
-    demo06_onIndexChange (index) {
-      this.demo06_index = index
-    }
+    _getDiscList() {
+      getDiscList().then((res) => {
+        debugger
+        if (res.code === ERR_OK) {
+          this.discList = res.data.list
+        }
+      })
+    },
   },
   created () {
     this._getRecommend()
+    this._getDiscList()
   }
 }
 </script>
-
 <style scoped>
-
 </style>
