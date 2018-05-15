@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     noEmptyData () {
-      return this.data ? this.data : [{}]
+      return this.data && this.data.length ? this.data : [{}]
     }
   },
   methods: {
