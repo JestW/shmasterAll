@@ -40,17 +40,9 @@ export default {
         return []
       }
     }
-    // noEmptyData: {
-    //   type: Array,
-    //   default: function () {
-    //     return []
-    //   }
-    // }
   },
   computed: {
     noEmptyData () {
-      // debugger
-      // return this.data && this.data.length ? this.data : [{}]
       return this.data && this.data.length ? this.data : [{}]
     }
   },

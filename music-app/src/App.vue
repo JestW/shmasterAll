@@ -1,13 +1,32 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <x-header
+      style="vertical-align:middle"
+      :left-options="{showBack: false}">
+      <img :src='UrlHead' style="width:30px;" alt="">Children Music</x-header>
+    <tab>
+      <tab-item @on-item-click="$router.push('/recommend')">推荐</tab-item>
+      <tab-item @on-item-click="$router.push('/singer')">歌手</tab-item>
+      <tab-item @on-item-click="$router.push('/rank')">排行</tab-item>
+      <tab-item @on-item-click="$router.push('/search')">搜索</tab-item>
+    </tab>
     <router-view/>
   </div>
 </template>
-
 <script>
+import { XHeader, Tab, TabItem } from 'vux'
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      UrlHead: 'static/images/logo@2x.png'
+    }
+  },
+  components: {
+    XHeader,
+    Tab,
+    TabItem
+  }
 }
 </script>
 
@@ -18,6 +37,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+div.vux-header,  div.vux-tab{
+  background-color: transparent;
 }
 </style>
