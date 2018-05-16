@@ -53,54 +53,8 @@ export default {
   methods: {
     onItemClick () {
       console.log('on item click')
-    },
-    // __getServer () {
-    //   getServer('Login', {
-    //     CorpID: 12,
-    //     pwd: 9999,
-    //     userName: 13899999999
-    //   })
-    // }
+    }
   }
-  // _getDiscList () {
-  //   getService().then((res) => {
-  //     // debugger
-  //     if (res.code === ERR_OK) {
-  //       // this.discList = res.data.list
-  //       const serverList = res.data
-  //       // debugger
-  //       const url = findUrl('Login', serverList)
-  //       const eurl = findUrl('GetEmployeeShifts', serverList)
-  //       this.getLogin(url)
-  //       this.getEmployee(eurl)
-  //     }
-  //   })
-  // },
-  // getLogin (url) {
-  //   // debugger
-  //   axios.post(url, {
-  //     CorpID: 12,
-  //     pwd: 9999,
-  //     userName: 13899999999
-  //   }).then(function (response) {
-  //     console.log(response)
-  //   })
-  //     .catch(function (error) {
-  //       console.log(error)
-  //     })
-  // },
-  //   getEmployee (eurl) {
-  //     axios.post(eurl, {
-  //       queryDate: dateFormat(new Date(), 'YYYY-MM-DD'),
-  //       CorpID: 12
-  //     }).then(function (response) {
-  //       console.log(response)
-  //     })
-  //       .catch(function (error) {
-  //         console.log(error)
-  //       })
-  //   }
-  // }
 }
 </script>
 <style scoped>

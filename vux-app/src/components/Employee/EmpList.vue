@@ -28,7 +28,7 @@
 </template>
 <script>
 import { Grid, GridItem, GroupTitle, dateFormat, XHeader } from 'vux'
-// import { _getServer } from '../../net/axios'
+
 export default {
   name: 'home',
   data () {
@@ -44,19 +44,13 @@ export default {
     XHeader
   },
   created () {
-    this.__getServer()
+
   },
   methods: {
     onItemClick () {
       console.log('on item click')
-    },
-    // __getServer () {
-    //   getServer('Login', {
-    //     CorpID: 12,
-    //     pwd: 9999,
-    //     userName: 13899999999
-    //   })
-    // }
+    }
+
   }
 }
 </script>

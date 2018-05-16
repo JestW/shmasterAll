@@ -2,7 +2,7 @@
 <div>
     <img src="/static/images/login-bg.jpg" alt="background-img" style="height:100%;
 width:150%">
-    <div style="position: absolute;top:30%;margin: 0 auto; width:100%;">
+    <div style="position: absolute;top:10%;margin: 0 auto; width:100%;">
       <div style="text-align: center">
         <img style="width:130px;margin:auto 10%;" src="/static/images/logo.png" alt="logo">
         <p style="margin-bottom:10px;font-size: 20px">您的纺纱智能助手</p>
@@ -51,6 +51,10 @@ width:150%">
 </template>
 
 <script>
+import ajax from '../../net/ajax'
+import { _getService, findUrl } from '../../net/axios'
+import { ERR_OK } from '../../net/config'
+import axios from 'axios'
 import { XButton, Group, XInput } from 'vux'
 export default {
   name: 'Login',

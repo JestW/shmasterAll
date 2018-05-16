@@ -4,6 +4,27 @@ import axios from 'axios'
 // const serviceList;
 const url = 'http://api.shengtex.com/Service/GetService'
 // 拦截请求
+var instance = axios.create({
+  timeout: 10000,
+  headers: {'X-Custom-Header': 'foobar'}
+})
+axios.create({
+  timeout: 10000,
+  header: {
+    'Content-Type': 'application/json1123'
+  },
+  // `transformRequest`选项允许我们在请求发送到服务器之前对请求的数据做出一些改动
+  // 该选项只适用于以下请求方式：`put/post/patch`
+  // 数组里面的最后一个函数必须返回一个字符串、-一个`ArrayBuffer`或者`Stream`
+  transformRequest: [],
+  // transformResponse: [upperToLowerCamelCase],
+  // `validateStatus`定义了是否根据http相应状态码，来resolve或者reject promise
+  // 如果`validateStatus`返回true(或者设置为`null`或者`undefined`),那么promise的状态将会是resolved,否则其状态就是rejected
+  validateStatus: function (status) {
+    return status >= 200 && status < 300 // default
+  }
+})
+
 axios.defaults.headers.common['Authorization'] = 'hD+d3pojZbjwwV6smigxAltYBU+FZh9i5jEwNsErhDcn6oYvVnhRSAQ233EwUxBiLak3NNIfMiflvCZPDg+nE/cvjG7xe7TbilyjgTJGK5tc2o8/zpRPH/3lcZogHha6PqgJlqjOm7nXAbrkI4cY+/uEXAtxbr0OQyueoWdjO3C0WX0u5lrBdw=='
 // 连接数据库
 export function _getService () {
@@ -14,7 +35,7 @@ export function _getService () {
   }
   // debugger
   return axios.get(url, {
-    params: data
+    params: data,
   }).then((res) => {
     // debugger
     return Promise.resolve(res.data)

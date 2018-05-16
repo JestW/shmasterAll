@@ -77,14 +77,17 @@ export default new Router({
       component: Demo5
     },
     {
-      path: '/Demo6',
-      name: 'Demo6',
-      component: Demo6
+      path: '/jScroll',
+      component: resolve => require(['../components/Common/JScroll'], resolve)
     },
     {
       path: '/test3',
       name: 'Test3',
       component: resolve => require(['../components/Test/Test3'], resolve)
+    },
+    {
+      path: '/test/jScroll',
+      component: resolve => require(['../components/Test/JScroll'], resolve)
     },
     {
       path: '/test4',

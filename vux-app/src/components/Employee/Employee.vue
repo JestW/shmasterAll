@@ -9,67 +9,6 @@
     :rows= "Swork"
     :data = "workInfo"
   ></Public>
-  <!--<x-table>-->
-    <!--<thead>-->
-    <!--</thead>-->
-
-    <!--&lt;!&ndash;<tbody v-for="(member) in memberInfo">&ndash;&gt;-->
-      <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-        <!--&lt;!&ndash;<td>日期</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;<td> {{member.date}}</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr class="slist-cell">&ndash;&gt;-->
-          <!--&lt;!&ndash;<td> 员工姓名</td>&ndash;&gt;-->
-          <!--&lt;!&ndash;<td> {{member.name}}</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-        <!--&lt;!&ndash;<tr class="slist-cell">&ndash;&gt;-->
-          <!--&lt;!&ndash;<td> 所属公司</td>&ndash;&gt;-->
-          <!--&lt;!&ndash;<td> {{member.corpName}}</td>&ndash;&gt;-->
-        <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tbody v-for="(work) in workInfo">&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>所属公司</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.ProcessName }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>所属班次</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.ShiftName }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>所属车间</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.WorkShopName }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>所属工序</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.ProcessName }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>看台信息</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.MachineCodes }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>签到时间</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.SignIn }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>签退时间</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.SignOut }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>替岗时间</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.InsteadTime }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>当班产量</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.OutPut }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<tr class="slist-cell" >&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>计件工资</td>&ndash;&gt;-->
-      <!--&lt;!&ndash;<td>{{ work.Salary }}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tbody>&ndash;&gt;-->
-  <!--</x-table>-->
 </div>
 </template>
 <script>
@@ -101,39 +40,39 @@ export default {
       Swork: [
         {
           field: '所属班次',
-          name: 'ShiftName'
+          name: 'shiftName'
         },
         {
           field: '所属车间',
-          name: 'WorkShopName'
+          name: 'workShopName'
         },
         {
           field: '所属工序',
-          name: 'ProcessName'
+          name: 'processName'
         },
         {
           field: '看台信息',
-          name: 'MachineCodes'
+          name: 'machineCodes'
         },
         {
           field: '签到时间',
-          name: 'SignIn'
+          name: 'signIn'
         },
         {
           field: '签退时间',
-          name: 'SignOut'
+          name: 'signOut'
         },
         {
           field: '替岗时间',
-          name: 'InsteadTime'
+          name: 'insteadTime'
         },
         {
           field: '当班产量',
-          name: 'OutPut'
+          name: 'outPut'
         },
         {
           field: '计件工资',
-          name: 'Salary'
+          name: 'salary'
         }
       ]
     }
@@ -151,59 +90,33 @@ export default {
         if (res.code === ERR_OK) {
           const serverList = res.data
           const url = findUrl('GetEmployeeShifts', serverList)
-          // const eurl = findUrl('GetEmployeeShifts', serverList)
-          // this.getLogin(url)
-          // this.getEmployee(eurl)
           axios.post(url, {
             date: dateFormat(new Date()),
             queryDate: '2018-05-11',
             CorpID: 12
           }).then(function (response) {
-            const content = response.data.Data
-            // debugger
+            const content = response.data.data
+            debugger
             // console.log(content)
             _this.memberInfo = [{
               date: dateFormat(new Date(), 'YYYY-MM-DD'),
-              name: content.EmpName,
-              corpName: content.CorpName
+              name: content.empName,
+              corpName: content.corpName
             }]
-            // console.log(content)
-            // console.log(_this.memberInfo[0].name)
-            // console.log(_this.memberInfo[0].corpName)
-            // debugger
-            // console.log(_this.memberInfo)
-            // _this.workInfo = (content.UserShifs || [])
-            _this.workInfo = (content.UserShifs || [])
+            debugger
+            _this.workInfo = (content.userShifs || [])
               .map(x => {
-                x.SignIn = x.SignIn ? x.SignIn.split(' ')[1] : '暂无'
-                x.SignOut = x.SignOut ? x.SignOut.split(' ')[1] : '暂无'
+                x.signIn = x.signIn ? x.signIn.split(' ')[1] : '暂无'
+                x.signOut = x.signOut ? x.signOut.split(' ')[1] : '暂无'
                 // let arr = [...x.signIn]
                 return x
               })
-            // if (content.UserShifs) {
-            //   _this.workInfo = [{
-            //     ProcessName: content.UserShifs[0].ProcessName,
-            //     ShiftName: content.UserShifs[0].ShiftName,
-            //     ShiftsId: content.UserShifs[0].ShiftsId,
-            //     SignIn: content.UserShifs[0].SignIn,
-            //     SignOut: content.UserShifs[0].SignOut,
-            //     WorkShopName: content.UserShifs[0].WorkShopName,
-            //     MachineCodes: content.UserShifs[0].MachineCodes,
-            //     OutPut: content.UserShifs[0].OutPut,
-            //     Salary: content.UserShifs[0].Salary,
-            //     InsteadTime: content.UserShifs[0].InsteadTime
-            //   }]
-            // }
           })
             .catch(function (error) {
               console.log(error)
             })
         }
       })
-      // getServer('GetEmployeeShifts', {
-      //   queryDate: '2018-05-11',
-      //   CorpID: 12
-      // })
     }
   },
   mounted () {
