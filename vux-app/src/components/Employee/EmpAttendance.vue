@@ -10,17 +10,17 @@
            :title="'日期: '"></cell>
       </group>
       <group style="margin-top: 0">
-        <cell title="员工姓名" primary="content" :value="attendance.empName"></cell>
-        <cell title="所属工种" primary="content" :value="attendance.workTypeName"></cell>
+        <cell title="员工姓名" primary="content" :value="attendance.EmpName"></cell>
+        <cell title="所属工种" primary="content" :value="attendance.WorkTypeName"></cell>
         <cell
-          v-if="attendance.signStatus === 1"
+          v-if="attendance.SignStatus === 1"
           title="签退时间"
           primary="content"
           style="padding:0 0 0 15px"
           :value="'123'">
           <datetime v-model="time" @on-change="change"></datetime></cell>
         <cell
-          v-if="attendance.signStatus === 0"
+          v-if="attendance.SignStatus === 0"
           title="签到时间"
           primary="content"
           style="padding:0 0 0 15px"
@@ -61,6 +61,7 @@
 import { XHeader, XTable, TransferDom, Group, Datetime, Actionsheet, XSwitch, Cell, dateFormat, XTextarea } from 'vux'
 import JScroll from '../Common/JScroll'
 import { _getService, findUrl } from '../../net/axios'
+// import getService from '../../net/axios'
 import { ERR_OK } from '../../net/config'
 import axios from 'axios'
 export default {
@@ -102,9 +103,11 @@ export default {
   },
   methods: {
     onCancel () {
+      this.isShow = false
       console.log('onCancel')
     },
     onOk () {
+      this.isShow = false
       console.log('onOk')
     },
     showMesg (data) {
@@ -116,6 +119,22 @@ export default {
     selectShift () {
       this.isShow = true
     },
+    // getAttention () {
+    //   getService.post('GetMachinesByWorkShopIDAndProcessID', {
+    //     WorkShopID: this.attendance.workshopId,
+    //     ProcessID: this.attendance.processId
+    //   })
+    // },
+    // __getServer () {
+    //   const _this = this
+    //   debugger
+    //   getService('GetAttendanceBasicInfo', {
+    //     CorpID: 12
+    //   }).then(function (response) {
+    //     debugger
+    //     _this.attendance = response.data.data
+    //   })
+    // }
     __getServer () {
       const _this = this
       _getService().then((res) => {
@@ -125,35 +144,18 @@ export default {
           axios.post(url, {
             CorpID: 12
           }).then(function (response) {
-            _this.attendance = response.data.data
+            _this.attendance = response.data.Data
             // console.log(_this.attendance.EmpName)
             // debugger
-            _this.shiftList = response.data.data.shiftsList.map( x => x.name)
+            _this.shiftList = response.data.Data.ShiftsList.map( x => x.Name)
             console.log(_this.shiftList)
           })
         }
       })
     }
-    // _selectShift () {
-    //   const _this = this
-    //   _getService().then((res) => {
-    //     if (res.code === ERR_OK) {
-    //       const serverList = res.data
-    //       const url = findUrl('GetAttendanceBasicInfo', serverList)
-    //       axios.post(url, {
-    //         CorpID: 12
-    //       }).then(function (response) {
-    //         _this.attendance = response.data.Data
-    //         console.log(_this.attendance.EmpName)
-    //         // debugger
-    //       })
-    //     }
-    //   })
-    // }
   }
 }
 </script>
-
 <style scoped>
 #head{
   background-color: #32c5e2;

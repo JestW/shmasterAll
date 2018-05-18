@@ -99,16 +99,19 @@ export default new Router({
       name: 'EmpList',
       component: resolve => require(['../components/Employee/EmpList'], resolve)
     },
+    // 考勤
     {
       path: '/empAtt',
       name: 'EmpAttendance',
       component: resolve => require(['../components/Employee/EmpAttendance'], resolve)
     },
+    // 报工
     {
       path: '/empReport',
       name: 'EmpReport',
       component: resolve => require(['../components/Employee/EmpReport'], resolve)
     },
+    // 替岗
     {
       path: '/empSub',
       name: 'EmpSubstitute',
@@ -119,12 +122,24 @@ export default new Router({
       name: 'BindEvent',
       component: resolve => require(['../components/Test/BindEvent'], resolve)
     },
+    // ref的用法
+    {
+      path: '/jRef',
+      name: 'JRef',
+      component: resolve => require(['../components/Test/JRef'], resolve)
+    },
+    // props-validates的用法
+    {
+      path: '/jProps',
+      name: 'JProps',
+      component: resolve => require(['../components/Test/JProps'], resolve)
+    },
     {
       path: '/test',
       name: 'Test',
       component: resolve => require(['../components/Test/Test'], resolve),
       direction: '/test/test2',
-      children:[
+      children: [
         {
           path: '/test/test2',
           name: 'Test2',

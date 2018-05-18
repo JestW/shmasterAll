@@ -63,6 +63,7 @@ export default {
       console.log(1)
       // console.log(this.val)
       this.isShow = false
+      console.log(this.isShow)
       this.$emit('child', this.val)
     }
     // JRightClick () {

@@ -35,7 +35,7 @@ export function _getService () {
   }
   // debugger
   return axios.get(url, {
-    params: data,
+    params: data
   }).then((res) => {
     // debugger
     return Promise.resolve(res.data)
