@@ -8,7 +8,7 @@
 
 <script>
 import Vue from 'vue'
-new Vue({
+Vue({
   el: '#counter-event-example',
   data: {
     total: 0

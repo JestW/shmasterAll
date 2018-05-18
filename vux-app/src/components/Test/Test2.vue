@@ -11,14 +11,14 @@ export default {
   name: 'Test2',
   components: {
   },
-  props:{
-    id:{
-      type:Number,
-      required:true
+  props: {
+    id: {
+      type: Number,
+      required: true
     }
   },
-  methods:{
-    te(){
+  methods: {
+    te () {
       return 11;
     }
   }

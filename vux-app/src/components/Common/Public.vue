@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(item) in data"></div>
-    <x-table  style="background-color:#fff;border-top:none">
+    <x-table  style="background-color:#fff;border-top:none; font-size: 14px; ">
       <tbody>
         <!--<tr>-->
           <!--<td>{{ key }}</td>-->
@@ -9,9 +9,9 @@
         <!--</tr>-->
         <tr v-for="(row) in rows" class="slist-cell">
           <!--<td>{{index}}</td>-->
-          <td style="width: 100px;" v-html="row.field"></td>
+          <td style="width: 80px;" v-html="row.field"></td>
           <!--<td>{{item[row.name]}}</td>-->
-          <td v-for = "(val) in noEmptyData" style="text-align: left">
+          <td v-for = "(val) in noEmptyData" style="text-align: left;padding: 0 4px;">
             <span>{{ val[row.name] ? val[row.name] : val[row.name] !== 0 ? ' ': 0 }}</span>
           </td>
         </tr>

@@ -24,37 +24,49 @@
           title="签到时间"
           primary="content"
           style="padding:0 0 0 15px"
-          is-link
           :value="'123'">
           <datetime v-model="time" @on-change="change"></datetime></cell>
-        <!--<cell title="班次" primary="content" is-link :value="shift" @click.native = "selectShift"></cell>-->
+        <cell title="班次" primary="content" is-link :value="shift" @click.native = "selectShift"></cell>
         <!--<cell title="班次" primary="content">-->
           <!--<x-switch v-model="showShift"></x-switch>-->
         <!--</cell>-->
         <group>
-          <x-switch :title="'Android Theme'" v-model="show7"></x-switch>
+          <!--<x-switch :title="'Android Theme'" v-model="show7"></x-switch>-->
         </group>
       </group>
       <group>
         <x-textarea :title="'签退事由'" :placeholder="'请填写'" :show-counter="false" :rows="1" autosize></x-textarea>
       </group>
     </div>
+    <div v-transfer-dom>
+    <j-scroll
+      :isShow = "isShow"
+      :data = "shiftList"
+      :leftClick = "onCancel"
+      :rightClick = "onOk"
+      v-on:child = "showMesg"
+    ></j-scroll>
+    </div>
   </div>
 </template>
-<actionsheet
-  v-model="show7"
-  :menus="menu7"
-  theme="android"
-  @on-click-menu="click"
-  @on-after-hide="log('after hide')"
-  @on-after-show="log('after show')">
-</actionsheet>
+<!--<actionsheet-->
+  <!--v-model="show7"-->
+  <!--:menus="menu7"-->
+  <!--theme="android"-->
+  <!--@on-click-menu="click"-->
+  <!--@on-after-hide="log('after hide')"-->
+  <!--@on-after-show="log('after show')">-->
+<!--</actionsheet>-->
 <script>
-import { XHeader, XTable, Group, Datetime, Actionsheet, XSwitch, Cell, dateFormat, XTextarea } from 'vux'
+import { XHeader, XTable, TransferDom, Group, Datetime, Actionsheet, XSwitch, Cell, dateFormat, XTextarea } from 'vux'
+import JScroll from '../Common/JScroll'
 import { _getService, findUrl } from '../../net/axios'
 import { ERR_OK } from '../../net/config'
 import axios from 'axios'
 export default {
+  directives: {
+    TransferDom
+  },
   components: {
     XHeader,
     Group,
@@ -63,6 +75,7 @@ export default {
     Actionsheet,
     dateFormat,
     XSwitch,
+    JScroll,
     Cell,
     XTextarea
   },
@@ -73,24 +86,35 @@ export default {
       time: dateFormat(new Date(), 'YYYY-MM-DD'),
       shiftList: [],
       shift: '',
+      isShow: false,
       showShift: false,
       show7: false,
       menu7: {
         menu1: '北京烤鸭',
         menu2: '陕西油泼面',
         menu3: '西安肉夹馍'
-      }
+      },
+      data: [ 'China1', 'Japan1', 'America1', 'China2', 'Japan2', 'America2', 'China3', 'Japan3', 'America3', 'China4', 'Japan4', 'America4', 'China5', 'Japan5', 'America5' ]
     }
   },
   created () {
     this.__getServer()
   },
   methods: {
-    click (key) {
-      console.log(key)
+    onCancel () {
+      console.log('onCancel')
+    },
+    onOk () {
+      console.log('onOk')
+    },
+    showMesg (data) {
+      this.shift = data
     },
     change (value) {
       this.time = value
+    },
+    selectShift () {
+      this.isShow = true
     },
     __getServer () {
       const _this = this
@@ -104,15 +128,12 @@ export default {
             _this.attendance = response.data.data
             // console.log(_this.attendance.EmpName)
             // debugger
-            _this.shiftList = response.data.data.ShiftsList
+            _this.shiftList = response.data.data.shiftsList.map( x => x.name)
             console.log(_this.shiftList)
           })
         }
       })
     }
-    // selectShift (val) {
-    //   this.shift = this.shiftList[0].Name
-    //     }
     // _selectShift () {
     //   const _this = this
     //   _getService().then((res) => {

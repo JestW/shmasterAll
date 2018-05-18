@@ -96,14 +96,14 @@ export default {
             CorpID: 12
           }).then(function (response) {
             const content = response.data.data
-            debugger
+            // debugger
             // console.log(content)
             _this.memberInfo = [{
               date: dateFormat(new Date(), 'YYYY-MM-DD'),
               name: content.empName,
               corpName: content.corpName
             }]
-            debugger
+            // debugger
             _this.workInfo = (content.userShifs || [])
               .map(x => {
                 x.signIn = x.signIn ? x.signIn.split(' ')[1] : '暂无'
