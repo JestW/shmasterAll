@@ -12,12 +12,12 @@ import router from './router'
 import Vuex from 'vuex'
 import { sync } from 'vuex-router-sync'
 // import es6-promise from 'es6-promise'
-
+import AjaxPlugin from './Ajax/AjaxPlugin'
+import ValidatePlugin from './components/Test/Child/ChildPlugins'
 import {
   DevicePlugin,
   ToastPlugin,
   AlertPlugin,
-  AjaxPlugin,
   ConfirmPlugin,
   LoadingPlugin,
   DatetimePlugin
@@ -32,7 +32,7 @@ Vue.use(DatetimePlugin)
 
 Vue.config.productionTip = false
 Vue.use(Vuex)
-
+Vue.use(ValidatePlugin)
 // Vue.component('icon', Icon)
 /* eslint-disable no-new */
 

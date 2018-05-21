@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     te () {
-      return 11;
+      return 11
     }
   }
 }

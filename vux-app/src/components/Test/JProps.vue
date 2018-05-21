@@ -8,7 +8,6 @@
     <child-props :message="data"></child-props>
   </div>
 </template>
-
 <script>
 import ChildProps from './Child/ChildProps'
 export default {

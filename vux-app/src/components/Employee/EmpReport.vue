@@ -18,6 +18,9 @@ export default {
     XHeader,
     dateFormat
   },
+  created () {
+    this.getMachineList()
+  },
   data () {
     return {
       WList: [
@@ -43,6 +46,23 @@ export default {
           field: '结束产量(KG)'
         }
       ]
+    }
+  },
+  methods: {
+    async getMachineList () {
+      let response
+      try {
+        response = await this.$http
+          .post('SelectBaoGong', {
+            WorkShopID: 3,
+            ProcessID: 7,
+            CorpID: 12
+          })
+      } catch (e) {
+        throw e
+      }
+      let content = response.data
+      console.log(content)
     }
   }
 }

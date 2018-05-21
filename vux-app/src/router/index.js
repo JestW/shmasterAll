@@ -128,6 +128,12 @@ export default new Router({
       name: 'JRef',
       component: resolve => require(['../components/Test/JRef'], resolve)
     },
+    // ref的用法
+    {
+      path: '/jPlugins',
+      name: 'JPlugins',
+      component: resolve => require(['../components/Test/JPlugins'], resolve)
+    },
     // props-validates的用法
     {
       path: '/jProps',
