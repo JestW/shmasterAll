@@ -147,7 +147,7 @@ export default {
             _this.attendance = response.data.Data
             // console.log(_this.attendance.EmpName)
             // debugger
-            _this.shiftList = response.data.Data.ShiftsList.map( x => x.Name)
+            _this.shiftList = response.data.Data.ShiftsList.map(x => x.Name)
             console.log(_this.shiftList)
           })
         }

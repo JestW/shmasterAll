@@ -3,7 +3,7 @@
     <x-table  style="width:auto; background-color:#fff; overflow: hidden">
       <thead>
         <tr>
-          <th style="padding: 5px 10px;" v-for="row in rows"><span>{{ row.field }}</span></th>
+          <th style="padding: 5px 10px;" v-for="row in rows"  :key="row"><span>{{ row.field }}</span></th>
         </tr>
       </thead>
       <tbody>

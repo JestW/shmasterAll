@@ -14,6 +14,13 @@ import { sync } from 'vuex-router-sync'
 // import es6-promise from 'es6-promise'
 import AjaxPlugin from './Ajax/AjaxPlugin'
 import ValidatePlugin from './components/Test/Child/ChildPlugins'
+// 引入的loadingPlugins
+import Loading from './components/Test/LoadingPlugins'
+// 引入的Toastplugins
+import Toastplugins from './components/Test/ToastPlugins/Toast'
+// 引入的FirstPlugins
+import FirstPlugins from './components/Test/Plugins/FirstPlugins'
+import './components/Test/ToastPlugins/toast.css'
 import {
   DevicePlugin,
   ToastPlugin,
@@ -22,6 +29,10 @@ import {
   LoadingPlugin,
   DatetimePlugin
 } from 'vux'
+Vue.use(Loading)
+Vue.use(Toastplugins)
+Vue.use(FirstPlugins)
+
 Vue.use(DevicePlugin)
 Vue.use(ToastPlugin)
 Vue.use(AjaxPlugin)

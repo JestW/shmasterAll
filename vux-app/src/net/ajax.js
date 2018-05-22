@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import store from '../store'
+import store from '../store'
 // import server from './server'
 // const serviceList = ''
 const ajax = axios.create({
@@ -33,9 +33,9 @@ ajax.defaults.headers.common['Authorization'] = 'hD+d3pojZbjwwV6smigxAltYBU+FZh9
 ajax.interceptors.response.use(function (res) {
   // 在这里对返回的数据进行处理
   return res
-}, function (err) {
+}, function (e) {
   // Do something with response error
-  return Promise.reject(error)
+  return Promise.reject(e)
 })
 const GET_SERVICE_URL = `http://api.shengtex.com/Service/GetService`
 // const getService = async function () {
@@ -63,14 +63,16 @@ const getService = async function () {
   try {
     let url
     url = GET_SERVICE_URL
-    url += '?code=' + 1001
+    // debugger
+    url += '?code=' + store.state.corpCode
     url += '&version=1.0.0'
     url += '&r=' + Math.random()
+    debugger
     res = await axios.get(url)
   } catch (e) {
     throw Object({message: '网络错误'})
   }
-  debugger
+  // debugger
   if (res) {
     let content = res.data
     if (content.isSucceed && content.data) {
@@ -106,16 +108,20 @@ const proxy = {
     // return await doPost()
   }
 }
-export default proxy
+// export default
+export default {
+  proxy,
+  getService: getService
+}
 
 const getServiceUrlByName = async function (serviceName) {
-  debugger
+  // debugger
   if (/\//.test(serviceName)) {
     return serviceName
   }
   // let serviceList = ''
   // 有服务列表缓存并且有此服务
-  debugger
+  // debugger
   // if (serviceList.length && findUrl(serviceName, serviceList)) {
   //   return findUrl(serviceName, serviceList)
   // } else {
@@ -133,7 +139,7 @@ const getServiceUrlByName = async function (serviceName) {
   }
 }
 function findUrl (name, serviceList) {
-  debugger
+  // debugger
   console.log(serviceList)
   let obj = serviceList.find(function (item) {
     return item.name === name

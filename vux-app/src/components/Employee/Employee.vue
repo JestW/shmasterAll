@@ -15,7 +15,7 @@
 import { XHeader, XTable, dateFormat } from 'vux'
 import { _getService, findUrl } from '../../net/axios'
 import { ERR_OK } from '../../net/config'
-// import axios from 'axios'
+import axios from 'axios'
 import Public from '../Common/Public'
 export default {
   name: 'Employee',

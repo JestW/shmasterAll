@@ -12,7 +12,8 @@ width:150%">
           <x-input
             title="公司码"
             label-width="100px"
-            name="corpID"
+            name="corpCode"
+            v-model="corpCode"
             placeholder="请输入公司码"
             keyboard="number"
             >
@@ -22,6 +23,7 @@ width:150%">
             title="手机号码"
             label-width="100px"
             name="mobile"
+            v-model="mobile"
             placeholder="请输入手机号码"
             keyboard="number"
             :max="11"
@@ -31,6 +33,7 @@ width:150%">
             title="密码"
             label-width="100px"
             name="password"
+            v-model="password"
             placeholder="请输入密码"
             keyboard="number"
             @on-enter="doLogin"
@@ -51,10 +54,11 @@ width:150%">
 </template>
 
 <script>
-import ajax from '../../net/ajax'
-import { _getService, findUrl } from '../../net/axios'
-import { ERR_OK } from '../../net/config'
-import axios from 'axios'
+import Service from '../../net/ajax'
+// import { _getService, findUrl } from '../../net/axios'
+// import { ERR_OK } from '../../net/config'
+// import axios from 'axios'
+
 import { XButton, Group, XInput } from 'vux'
 export default {
   name: 'Login',
@@ -63,10 +67,61 @@ export default {
     Group,
     XInput
   },
+  data () {
+    return {
+      corpCode: this.$store.state.corpCode,
+      mobile: this.$store.state.mobile,
+      password: ''
+    }
+  },
   methods: {
     doLogin () {
+      const _this = this
+      console.log(this.corpCode)
+      let message = []
+      if (!this.corpCode) {
+        message = '请输入公司码'
+      } else if (this.mobile.length === 0) {
+        message = '请输入手机号码'
+      } else if (this.mobile.length !== 11) {
+        message = '请输入正确的手机号码'
+      } else if (this.password.length === 0) {
+        message = '请输入密码'
+      }
+      if (message) {
+        this.$vux.toast.show({
+          type: 'text',
+          position: 'middle',
+          text: message,
+          width: 'auto'
+        })
+      }
+      if (this.corpCode) {
+        // debugger
+        this.$store.commit('UPDATE_CORP_CODE', this.corpCode)
+        // 这里需要把corpCode的值给store，对服务进行重加载
+        Service.getService()
+        debugger
+        _this.getEmp()
+      }
+      // this.$router.push('./home')
+    },
+    async getEmp () {
+      let response
+      try {
+        debugger
+        response = await this.$http
+          .post('Login', {
+            CorpID: 12,
+            userName: this.mobile,
+            pwd: this.password
+          })
+        // debugger
+      } catch (e) {
+        throw e
+      }
+      console.log(response)
       console.log(0)
-      this.$router.push('./home')
     }
   }
 }

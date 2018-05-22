@@ -61,13 +61,13 @@
       </flexbox>
       </div>
     <div>
-      <flexbox v-for="i in 2" style=" margin-top: 10px">
+      <flexbox v-for="i in 2" :key="i" style=" margin-top: 10px">
         <flexbox-item style="background-color: rgb(249, 249, 249);overflow: hidden">
           <flexbox>
             <flexbox-item>
               <div class="flex-demo">
                 <div>
-                  <p style="margin-bottom: 5px">开台设备<span>165</span>台</p>
+                  <p style="margin-bottom: 5px">开台设备<span>16{{i}}</span>台</p>
                   <p style="margin-bottom: 5px">维修设备<span>165</span>台</p>
                   <p>保养设备<span>165</span>台</p>
                 </div>
@@ -116,7 +116,7 @@ export default {
     Flexbox
   },
   created () {
-    alert(this.$myName)
+    // alert(this.$myName)
   },
   methods: {
     getResult (val) {

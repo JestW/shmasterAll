@@ -5,18 +5,31 @@
       <input type="text" v-model="username" v-on:change="userNameChange" class="form-control" :placeholder="username">
       <label class="label label-danger" v-if="showErrorLabel">用户不合法</label>
     </div>
+    <!--验证loadingPlugins-->
+    <Loading></Loading>
+    <!--验证toastPlugins-->
+    <div>
+      <button @click="openTop()">top</button>
+      <button @click="openCenter()">center</button>
+      <button @click="openBottom()">bottom</button>
+      <button @click="openLoading()">loading</button>
+    </div>
+    <div>
+      <!--<my-plugin></my-plugin>-->
+    </div>
   </div>
 </template>
-
 <script>
 export default{
-
   props: ['placeholder'],
   data: function () {
     return {
       username: '',
       showErrorLabel: false
     }
+  },
+  mounted () {
+    console.log(this.$myAddedProperty)
   },
   methods: {
     userNameChange () {
@@ -29,6 +42,25 @@ export default{
       console.log(this.showErrorLabel)
       // 调用父组件的方法
       this.$emit('childChange', 'username', this.username)
+    },
+    openTop () {
+      this.$toast.top('top')
+    },
+    openCenter () {
+      this.$toast.center('center')
+    },
+    openBottom () {
+      this.$toast.bottom('bottom')
+    },
+    openLoading () {
+      this.$loading('loading...')
+      let self = this
+      setTimeout(function () {
+        self.closeLoading()
+      }, 2000)
+    },
+    closeLoading () {
+      this.$loading.close()
     }
   }
 }

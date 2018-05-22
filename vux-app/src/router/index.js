@@ -11,7 +11,7 @@ import Top from '@/components/Common/Top'
 import Demo from '@/components/Common/Demo/Demo'
 import Demo2 from '@/components/Common/Demo/Demo2'
 import Demo5 from '@/components/Common/Demo/Demo5'
-import Demo6 from '@/components/Common/Demo/Demo6'
+// import Demo6 from '@/components/Common/Demo/Demo6'
 // import Test from '@/components/Test/Test'
 Vue.use(Router)
 
