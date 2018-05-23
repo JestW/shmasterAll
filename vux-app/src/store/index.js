@@ -7,7 +7,7 @@ const state = {
   planOrder: {}, // 生产单号
   orientation: 'portrait', // 'landscape' : 'portrait',
   loadingCount: 0,
-  serviceList: '',
+  serviceList: storage.get('SERVICE_LIST') || [],
   corpCode: storage.get('CORP_CODE') || '',
   uid: storage.get('UID') || '',
   corpId: storage.get('CORP_ID') || '',

@@ -13,9 +13,6 @@
 </template>
 <script>
 import { XHeader, XTable, dateFormat } from 'vux'
-import { _getService, findUrl } from '../../net/axios'
-import { ERR_OK } from '../../net/config'
-import axios from 'axios'
 import Public from '../Common/Public'
 export default {
   name: 'Employee',
@@ -30,7 +27,7 @@ export default {
         },
         {
           field: '员工姓名',
-          name: 'name'
+          name: 'empName'
         },
         {
           field: '所属公司',
@@ -84,43 +81,34 @@ export default {
     dateFormat
   },
   methods: {
-    __getServer () {
-      const _this = this
-      _getService().then((res) => {
-        if (res.code === ERR_OK) {
-          const serverList = res.data
-          const url = findUrl('GetEmployeeShifts', serverList)
-          axios.post(url, {
-            date: dateFormat(new Date()),
-            queryDate: '2018-05-11',
-            CorpID: 12
-          }).then(function (response) {
-            const content = response.data.data
-            // debugger
-            // console.log(content)
-            _this.memberInfo = [{
-              date: dateFormat(new Date(), 'YYYY-MM-DD'),
-              name: content.empName,
-              corpName: content.corpName
-            }]
-            // debugger
-            _this.workInfo = (content.userShifs || [])
-              .map(x => {
-                x.signIn = x.signIn ? x.signIn.split(' ')[1] : '暂无'
-                x.signOut = x.signOut ? x.signOut.split(' ')[1] : '暂无'
-                // let arr = [...x.signIn]
-                return x
-              })
-          })
-            .catch(function (error) {
-              console.log(error)
+    async getServer () {
+      await this.$http.post('GetEmployeeShifts', {
+        date: dateFormat(new Date(), 'YYYY-MM-DD')
+        // queryDate: '2018-05-11'
+      }).then(response => {
+        // debugger
+        this.$store.commit('UPDATE_LOADING', true)
+        const content = response.data
+        if (content.isSucceed) {
+          this.memberInfo = [{
+            date: dateFormat(new Date(), 'YYYY-MM-DD'),
+            empName: content.data.empName,
+            corpName: content.data.corpName
+          }]
+          this.workInfo = (content.data.userShifs || [])
+            .map(x => {
+              x.signIn = x.signIn ? x.signIn.split(' ')[1] : '暂无'
+              x.signOut = x.signOut ? x.signOut.split(' ')[1] : '暂无'
+              // let arr = [...x.signIn]
+              return x
             })
         }
+        this.$store.commit('UPDATE_LOADING', false)
       })
     }
   },
   mounted () {
-    this.__getServer()
+    this.getServer()
   }
 }
 </script>

@@ -1,36 +1,33 @@
-// import axios from 'axios'
-// import store from '../store'
-//
-// const getServiceUrlByName = async function (serviceName) {
-//   if (/\//.test(serviceName)) {
-//     return serviceName
-//   }
-//   let serviceList = store.state.serviceList
-//   // 有服务列表缓存并且有此服务
-//   if (serviceList.length && findUrl(serviceName, serviceList)) {
-//     return findUrl(serviceName, serviceList)
-//   } else {
-//     try {
-//       // 缓存里找不到服务地址则请求服务器
-//       serviceList = await getService(true)
-//     } catch (e) {
-//       throw e
-//     }
-//
-//     let serviceUrl = findUrl(serviceName, serviceList)
-//
-//     if (serviceUrl) {
-//       return serviceUrl
-//     } else {
-//       throw Object({message: '找不到服务'})
-//     }
-//   }
-// }
-//
-// function findUrl (name, serviceList) {
-//   let obj = serviceList.find(function (item) {
-//     return item.name === name
-//   })
-//   return obj ? obj.url : ''
-// }
-// import Service from './ajax'
+import axios from 'axios'
+import store from '../store'
+const GET_SERVICE_URL = `http://api.shengtex.com/Service/GetService`
+const getService = async function () {
+  let res
+  try {
+    let url
+    url = GET_SERVICE_URL
+    // debugger
+    url += '?code=' + store.state.corpCode
+    url += '&version=1.0.0'
+    url += '&r=' + Math.random()
+    res = await axios.get(url)
+  } catch (e) {
+    throw Object({message: '网络错误'})
+  }
+  // debugger
+  if (res) {
+    let content = res.data
+    if (content.isSucceed && content.data) {
+      let serviceList = content.data
+      // debugger
+      // 注意这里的提交方式，与Vue不一致
+      store.commit('UPDATE_SERVICE_LIST', serviceList)
+      return serviceList
+    } else {
+      throw Object({message: content.message})
+    }
+  } else {
+    throw Object({message: '接口错误'})
+  }
+}
+export default getService

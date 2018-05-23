@@ -1,18 +1,32 @@
 <template>
   <div id="app">
+    <div v-transfer-dom>
+      <loading :show="isLoading" text=""></loading>
+    </div>
     <router-view class="router-view"/>
   </div>
 </template>
 <script>
+import { Loading, TransferDom } from 'vux'
+// import store from './store'
+import { mapState } from 'vuex'
 export default {
   name: 'app',
+  directives: {
+    TransferDom
+  },
+  components: {
+    Loading
+  },
   data () {
     return {
-      drawerVisible: false
+      // drawerVisible: false
     }
   },
   computed: {
-
+    ...mapState({
+      isLoading: state => state.loadingCount > 0
+    })
   },
   methods: {
   }

@@ -21,10 +21,10 @@
     </div>
     <div>
       <grid :cols="4" :show-lr-borders="false" :show-vertical-dividers="false">
-        <grid-item link="/component/cell" :label="'人员'">
+        <grid-item link="/employee" :label="'人员'">
           <img slot="icon" src="/static/icon/emp.png/">
         </grid-item>
-        <grid-item :link="{ path: '/component/cell'}" :label="'考勤'">
+        <grid-item :link="{ path: '/empAtt'}" :label="'考勤'">
           <img slot="icon" src="/static/icon/emp.png/">
         </grid-item>
         <grid-item link="/component/cell" @on-item-click="onItemClick">

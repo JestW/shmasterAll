@@ -1,17 +1,17 @@
 <template>
   <div>
-    <div v-for="(item) in data" :key="item"></div>
+    <div v-for="(item, index) in data" :key="index"></div>
     <x-table  style="background-color:#fff;border-top:none; font-size: 14px; ">
       <tbody>
         <!--<tr>-->
           <!--<td>{{ key }}</td>-->
           <!--<td>{{ key }}</td>-->
         <!--</tr>-->
-        <tr v-for="(row) in rows" :key="row" class="slist-cell">
+        <tr v-for="(row, index) in rows" :key="index" class="slist-cell">
           <!--<td>{{index}}</td>-->
           <td style="width: 80px;" v-html="row.field"></td>
           <!--<td>{{item[row.name]}}</td>-->
-          <td v-for = "(val) in noEmptyData" :key="val" style="text-align: left;padding: 0 4px;">
+          <td v-for = "(val, index) in noEmptyData" :key="index" style="text-align: left;padding: 0 4px;">
             <span>{{ val[row.name] ? val[row.name] : val[row.name] !== 0 ? ' ': 0 }}</span>
           </td>
         </tr>

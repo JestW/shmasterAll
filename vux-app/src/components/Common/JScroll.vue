@@ -2,10 +2,10 @@
   <!--<div>-->
     <!--13-->
   <!--</div>-->
-  <div class="j_head" style="height: 60%" v-if="isShow">
-    <popup-header :left-text="'取消'" :right-text="'确定'" @on-click-left="leftClick" @on-click-right="rightClick"></popup-header>
+  <div class="j_head" style="height: 50%" v-if="isShow">
+    <popup-header style="background-color: #404040" :left-text="'取消'" :right-text="'确定'" @on-click-left="leftClick" @on-click-right="rightClick"></popup-header>
     <div style="height: 100% ;position: relative;overflow-y: scroll;text-align: left">
-        <checklist :options="data" :max="1" @on-change="change"></checklist>
+        <checklist :options="data" ref="check" :max="1" @on-change="change"></checklist>
     </div>
   </div>
 </template>
@@ -16,8 +16,8 @@ export default {
   name: 'JScroll',
   data () {
     return {
-      vai: ''
-      // isShow: true
+      isShow: false,
+      val: ''
     }
   },
   components: {
@@ -25,16 +25,10 @@ export default {
     Checklist
   },
   props: {
-    // leftClick: {
-    //   type: Function
+    // isShow: {
+    //   type: Boolean,
+    //   default: false
     // },
-    // rightClick: {
-    //   type: Function
-    // },
-    isShow: {
-      type: Boolean,
-      default: false
-    },
     height: {
       type: String
     },
@@ -52,33 +46,27 @@ export default {
   methods: {
     change (val, label) {
       console.log('change', val, label)
-      this.val = val
+      this.val = val.toString()
     },
     leftClick () {
       console.log(0)
       this.isShow = false
-      // console.log(this.isShow)
     },
     rightClick () {
-      console.log(1)
-      // console.log(this.val)
       this.isShow = false
+      console.log(this.val)
       console.log(this.isShow)
       this.$emit('child', this.val)
     }
-    // JRightClick () {
-    //   console.log(1)
-    // }
   }
 }
 </script>
-
 <style scoped>
 .j_head{
   position: fixed;
   bottom: 0;
-  border-top: 2px solid #e9e9e9;
-  box-shadow: 0 -1px 1px #a9a9a1;
+  /*border-top: 2px solid #2f2b2b;*/
+  box-shadow: 0 -1px 8px #2f2b2b;
   width:100%;
   left: 0;
 }

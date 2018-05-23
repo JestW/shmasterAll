@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// import store from '../store'
+// import getService from '../net/server'
 import Home from '@/components/Home/Home'
 import Login from '@/components/Login/Login'
 import Employee from '@/components/Employee/Employee'
@@ -15,7 +17,7 @@ import Demo5 from '@/components/Common/Demo/Demo5'
 // import Test from '@/components/Test/Test'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -28,7 +30,7 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       component: Login
     },
     {
@@ -156,3 +158,63 @@ export default new Router({
 
   ]
 })
+// 控制路由
+// router.beforeEach((to, from, next) => {
+//   if (to.name !== 'login') {
+//     if (!store.state.CorpID || !store.state.corpCode || !store.state.authToken) {
+//       next({
+//         name: 'login',
+//         query: { redirect: to.fullPath }
+//       })
+//     } else {
+//       try {
+//         getService()
+//           .then(() => {
+//             next()
+//           })
+//       } catch (e) {
+//         alert('获取服务失败！')
+//       }
+//     }
+//   }
+// })
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     // this route requires auth, check if logged in
+//     // if not, redirect to login page.
+//     let isLoginIn = !!store.state.authToken
+//     if (!isLoginIn) {
+//       next({
+//         path: '/login',
+//         query: { redirect: to.fullPath }
+//       })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     next() // 确保一定要调用 next()
+//   }
+// })
+
+// // 全局路由守卫
+// router.beforeEach((to, from, next) => {
+//   // to: Route 即将要进入的目标，路由对象
+//   // from: Route 当前导航正要离开的路由
+//   // next： Function：一定要调用该方法来resolve这个钩子，执行效果依赖next方法的调用参数
+//   let isLoginIn = store.state.authToken
+//   // const nextRoute = ['home', 'good-list', 'good-detail', 'cart', 'profile'];
+//   if (to.fullPath.indexOf(to.name) >= 0) { // 未登录状态
+//     if (!isLoginIn) {
+//       console.log('what fuck')
+//       router.push({ name: 'login' })
+//     }
+//   }
+//   if (to.name === 'login') { // 当页面到达login页面时，已登陆状态
+//     if (isLoginIn) {
+//       console.log('已经登陆')
+//       router.push({ name: 'home' })
+//     }
+//   }
+//   next()
+// })
+export default router

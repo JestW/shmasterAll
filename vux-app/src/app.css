@@ -11,12 +11,10 @@ body{
 }
 div.weui-cells{
   padding: 0;
-
   margin-top: 0;
 }
 div.weui-cell{
   padding: 10px 15px;
-
 }
 div.weui-cells:before{
   border:none;
@@ -25,7 +23,7 @@ div.vux-no-group-title{
   margin-top: 0;
 }
 div.sh_header{
-  background-color: #32c5e2;
+  background-color: #404c4e;
 }
 div.sh_header .vux-header-left a,
 div.sh_header .vux-header-right a{

@@ -42,11 +42,13 @@ width:150%">
           </x-input>
         </group>
         <group class="sh_input_login">
-          <x-button
-            type="primary"
-            style="margin-top: 2px;"
-            @click.native="doLogin"
-          >登陆</x-button>
+         <!--<keep-alive>-->
+           <x-button
+             type="primary"
+             style="margin-top: 2px;"
+             @click.native="doLogin"
+           >登陆</x-button>
+         <!--</keep-alive>-->
         </group>
       </div>
     </div>
@@ -54,7 +56,7 @@ width:150%">
 </template>
 
 <script>
-import Service from '../../net/ajax'
+// import getService from '../../net/server'
 // import { _getService, findUrl } from '../../net/axios'
 // import { ERR_OK } from '../../net/config'
 // import axios from 'axios'
@@ -77,15 +79,13 @@ export default {
   methods: {
     doLogin () {
       const _this = this
-      console.log(this.corpCode)
-      let message = []
+      // console.log(this.corpCode)
+      let message
       if (!this.corpCode) {
         message = '请输入公司码'
-      } else if (this.mobile.length === 0) {
+      } else if (!this.mobile || this.mobile.length === 0) {
         message = '请输入手机号码'
-      } else if (this.mobile.length !== 11) {
-        message = '请输入正确的手机号码'
-      } else if (this.password.length === 0) {
+      } else if (!this.password || this.password.length === 0) {
         message = '请输入密码'
       }
       if (message) {
@@ -95,34 +95,69 @@ export default {
           text: message,
           width: 'auto'
         })
+        return
       }
       if (this.corpCode) {
-        // debugger
         this.$store.commit('UPDATE_CORP_CODE', this.corpCode)
         // 这里需要把corpCode的值给store，对服务进行重加载
-        Service.getService()
-        debugger
+        // getService()
+        // debugger
         _this.getEmp()
       }
       // this.$router.push('./home')
     },
     async getEmp () {
+      const _this = this
       let response
       try {
-        debugger
+        // debugger
         response = await this.$http
           .post('Login', {
-            CorpID: 12,
             userName: this.mobile,
             pwd: this.password
           })
         // debugger
       } catch (e) {
-        throw e
+        throw Object({message: '网络错误'})
       }
-      console.log(response)
-      console.log(0)
+      if (response || response.data) {
+        let content = response.data
+        // debugger
+        if (content.isSucceed) {
+          this.$store.commit('UPDATE_AUTH_TOKEN', content.data.userToken)
+          this.$store.commit('UPDATE_CORP_ID', content.data.corpId)
+          this.$vux.toast.show({
+            text: '登录成功',
+            time: 300,
+            onHide () {
+              _this.$store.commit('UPDATE_UID', _this.mobile)
+              _this.$router.push(_this.$route.query.redirect || '/')
+            }
+          })
+        } else {
+          this.$vux.toast.show({
+            type: 'warn',
+            text: content.message
+          })
+        }
+      } else {
+        return {success: false, message: '登录失败'}
+      }
+    },
+    async preCheck () {
+      let corpCode = this.$store.state.corpCode
+      let corpId = this.$store.state.corpId
+      let authToken = this.$store.state.authToken
+      if (corpCode && corpId && authToken) { // 三个都有就跳走
+        this.$router.replace(this.$route.query.redirect || '/')
+      }
     }
+  },
+  mounted () {
+    this.preCheck()
+  },
+  activated () {
+    this.preCheck()
   }
 }
 </script>

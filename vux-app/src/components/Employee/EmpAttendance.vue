@@ -10,40 +10,36 @@
            :title="'日期: '"></cell>
       </group>
       <group style="margin-top: 0">
-        <cell title="员工姓名" primary="content" :value="attendance.EmpName"></cell>
-        <cell title="所属工种" primary="content" :value="attendance.WorkTypeName"></cell>
+        <cell title="员工姓名" primary="content" :value="attendance.empName"></cell>
+        <cell title="所属工种" primary="content" :value="attendance.workTypeName"></cell>
         <cell
-          v-if="attendance.SignStatus === 1"
+          v-if="attendance.signStatus === 1"
           title="签退时间"
           primary="content"
           style="padding:0 0 0 15px"
           :value="'123'">
           <datetime v-model="time" @on-change="change"></datetime></cell>
         <cell
-          v-if="attendance.SignStatus === 0"
+          v-if="attendance.signStatus === 0"
           title="签到时间"
           primary="content"
           style="padding:0 0 0 15px"
           :value="'123'">
           <datetime v-model="time" @on-change="change"></datetime></cell>
         <cell title="班次" primary="content" is-link :value="shift" @click.native = "selectShift"></cell>
-        <!--<cell title="班次" primary="content">-->
-          <!--<x-switch v-model="showShift"></x-switch>-->
-        <!--</cell>-->
-        <group>
-          <!--<x-switch :title="'Android Theme'" v-model="show7"></x-switch>-->
-        </group>
       </group>
       <group>
         <x-textarea :title="'签退事由'" :placeholder="'请填写'" :show-counter="false" :rows="1" autosize></x-textarea>
       </group>
+      <group style="margin-top: 30px">
+        <x-button type="primary">签到</x-button>
+      </group>
     </div>
     <div v-transfer-dom>
     <j-scroll
+      ref="jScroll"
       :isShow = "isShow"
       :data = "shiftList"
-      :leftClick = "onCancel"
-      :rightClick = "onOk"
       v-on:child = "showMesg"
     ></j-scroll>
     </div>
@@ -58,12 +54,8 @@
   <!--@on-after-show="log('after show')">-->
 <!--</actionsheet>-->
 <script>
-import { XHeader, XTable, TransferDom, Group, Datetime, Actionsheet, XSwitch, Cell, dateFormat, XTextarea } from 'vux'
+import { XHeader, XButton, XTable, TransferDom, Group, Datetime, Actionsheet, XSwitch, Cell, dateFormat, XTextarea } from 'vux'
 import JScroll from '../Common/JScroll'
-import { _getService, findUrl } from '../../net/axios'
-// import getService from '../../net/axios'
-import { ERR_OK } from '../../net/config'
-import axios from 'axios'
 export default {
   directives: {
     TransferDom
@@ -75,6 +67,7 @@ export default {
     Datetime,
     Actionsheet,
     dateFormat,
+    XButton,
     XSwitch,
     JScroll,
     Cell,
@@ -98,26 +91,18 @@ export default {
       data: [ 'China1', 'Japan1', 'America1', 'China2', 'Japan2', 'America2', 'China3', 'Japan3', 'America3', 'China4', 'Japan4', 'America4', 'China5', 'Japan5', 'America5' ]
     }
   },
-  created () {
-    this.__getServer()
+  mounted () {
+    this.getEmpAttention()
   },
   methods: {
-    onCancel () {
-      this.isShow = false
-      console.log('onCancel')
-    },
-    onOk () {
-      this.isShow = false
-      console.log('onOk')
+    change (value) {
+      this.time = value
     },
     showMesg (data) {
       this.shift = data
     },
-    change (value) {
-      this.time = value
-    },
     selectShift () {
-      this.isShow = true
+      this.$refs.jScroll.isShow = true
     },
     // getAttention () {
     //   getService.post('GetMachinesByWorkShopIDAndProcessID', {
@@ -135,21 +120,16 @@ export default {
     //     _this.attendance = response.data.data
     //   })
     // }
-    __getServer () {
+    async getEmpAttention () {
       const _this = this
-      _getService().then((res) => {
-        if (res.code === ERR_OK) {
-          const serverList = res.data
-          const url = findUrl('GetAttendanceBasicInfo', serverList)
-          axios.post(url, {
-            CorpID: 12
-          }).then(function (response) {
-            _this.attendance = response.data.Data
-            // console.log(_this.attendance.EmpName)
-            // debugger
-            _this.shiftList = response.data.Data.ShiftsList.map(x => x.Name)
-            console.log(_this.shiftList)
-          })
+      await this.$http.post('GetAttendanceBasicInfo', {
+      }).then((response) => {
+        let content = response.data
+        if (content.isSucceed) {
+          this.attendance = content.data
+          this.shiftList = content.data.shiftsList.map(x => x.name)
+          // debugger
+          console.log(_this.shiftList)
         }
       })
     }
@@ -157,9 +137,9 @@ export default {
 }
 </script>
 <style scoped>
-#head{
-  background-color: #32c5e2;
-}
+/*#head{*/
+  /*background-color: #32c5e2;*/
+/*}*/
 div.weui-cells:after{
   border:none;
 }
