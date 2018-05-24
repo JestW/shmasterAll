@@ -1,15 +1,15 @@
 <template>
-<div>
-  <x-header class="sh_header">人员<a slot="right">考察明细</a></x-header>
-  <Public
-    :rows= "Slist"
-    :data = "memberInfo"
-  ></Public>
-  <Public
-    :rows= "Swork"
-    :data = "workInfo"
-  ></Public>
-</div>
+  <div>
+    <x-header class="sh_header">人员<a slot="right">考察明细</a></x-header>
+    <Public
+      :rows= "Slist"
+      :data = "memberInfo"
+    ></Public>
+    <Public
+      :rows= "Swork"
+      :data = "workInfo"
+    ></Public>
+  </div>
 </template>
 <script>
 import { XHeader, XTable, dateFormat } from 'vux'

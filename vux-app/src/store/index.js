@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import storage from '@/storage'
+import work from './modules/work'
 import * as mutations from './mutations'
 Vue.use(Vuex)
 const state = {
@@ -16,6 +17,9 @@ const state = {
 }
 const store = new Vuex.Store({
   state,
+  moodules: {
+    work
+  },
   mutations
 })
 

@@ -1,11 +1,8 @@
 <template>
-  <!--<div>-->
-    <!--13-->
-  <!--</div>-->
-  <div class="j_head" style="height: 50%" v-if="isShow">
+  <div class="j_head" ref="select" style="height: 80%;background: #fff;" v-if="isShow">
     <popup-header style="background-color: #404040" :left-text="'取消'" :right-text="'确定'" @on-click-left="leftClick" @on-click-right="rightClick"></popup-header>
     <div style="height: 100% ;position: relative;overflow-y: scroll;text-align: left">
-        <checklist :options="data" ref="check" :max="1" @on-change="change"></checklist>
+        <checklist :options="data.map(x => x.name)" ref="check" :max="1" @on-change="change"></checklist>
     </div>
   </div>
 </template>
@@ -17,7 +14,8 @@ export default {
   data () {
     return {
       isShow: false,
-      val: ''
+      val: '',
+      shiftTime: []
     }
   },
   components: {
@@ -42,10 +40,10 @@ export default {
       }
     }
   },
-  computed: {},
+  computed: { },
   methods: {
     change (val, label) {
-      console.log('change', val, label)
+      // console.log('change', val, label)
       this.val = val.toString()
     },
     leftClick () {
@@ -53,10 +51,15 @@ export default {
       this.isShow = false
     },
     rightClick () {
+      // const _this = this
       this.isShow = false
-      console.log(this.val)
-      console.log(this.isShow)
-      this.$emit('child', this.val)
+      if (!this.val) {
+        return false
+      } else {
+        this.shiftTime = this.data.find(item => item.name === this.val)
+        // console.log(this.shiftTime)
+      }
+      this.$emit('child', this.shiftTime)
     }
   }
 }

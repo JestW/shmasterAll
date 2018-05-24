@@ -97,6 +97,11 @@ const router = new Router({
       component: resolve => require(['../components/Test/Test4'], resolve)
     },
     {
+      path: '/operate/:type',
+      name: 'Operate',
+      component: resolve => require(['../components/Employee/Operate'], resolve)
+    },
+    {
       path: '/empList',
       name: 'EmpList',
       component: resolve => require(['../components/Employee/EmpList'], resolve)

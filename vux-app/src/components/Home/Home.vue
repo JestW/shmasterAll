@@ -27,11 +27,11 @@
         <grid-item :link="{ path: '/empAtt'}" :label="'考勤'">
           <img slot="icon" src="/static/icon/emp.png/">
         </grid-item>
-        <grid-item link="/component/cell" @on-item-click="onItemClick">
+        <grid-item link="/operate/open" @on-item-click="onItemClick">
           <img slot="icon" src="/static/icon/emp.png/">
           <span slot="label">{{ '开台' }}</span>
         </grid-item>
-        <grid-item link="/component/cell" :label="'了机'">
+        <grid-item link="/operate/close" :label="'了机'">
           <img slot="icon" src="/static/icon/emp.png/">
         </grid-item>
         <grid-item link="/component/cell" :label="'产量报工'">
