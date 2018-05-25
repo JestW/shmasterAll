@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import store from '../store'
+// import checkModuleAuth from '../net/module'
+import store from '../store'
+// import AjaxPlugin from '../Ajax/AjaxPlugin'
 // import getService from '../net/server'
 import Home from '@/components/Home/Home'
 import Login from '@/components/Login/Login'
@@ -21,12 +23,14 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/home',
+      meta: { requiresAuth: true }
     },
     {
       path: '/home',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
@@ -36,37 +40,50 @@ const router = new Router({
     {
       path: '/employee',
       name: 'Employee',
-      component: Employee
+      component: Employee,
+      meta: {
+        requiresAuth: true,
+        moduleId: 101
+      }
     },
     {
       path: '/machine',
       name: 'Machine',
-      component: Machine
+      component: Machine,
+      meta: { requiresAuth: true }
     },
     {
       path: '/material',
       name: 'Material',
-      component: Material
+      component: Material,
+      meta: { requiresAuth: true }
     },
     {
       path: '/energy',
       name: 'Energy',
-      component: Energy
+      component: Energy,
+      meta: { requiresAuth: true }
     },
     {
       path: '/check',
       name: 'Check',
-      component: Check
+      component: Check,
+      meta: { requiresAuth: true }
     },
     {
       path: '/top',
       name: 'Top',
-      component: Top
+      component: Top,
+      meta: { requiresAuth: true }
     },
     {
       path: '/demo',
       name: 'Demo',
-      component: Demo
+      component: Demo,
+      meta: {
+        requiresAuth: true,
+        moduleId: 101
+      }
     },
     {
       path: '/demo2',
@@ -159,67 +176,48 @@ const router = new Router({
           component: resolve => require(['../components/Test/Test2'], resolve)
         }
       ]
+    },
+    {
+      path: '*',
+      component: resolve => require(['../components/Code404'], resolve)
     }
-
   ]
 })
 // 控制路由
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // this route requires auth, check if logged in
+    // if not, redirect to login page.
+    let isLoggin = store.state.authToken
+    let corpCode = store.state.corpCode
+    let corpId = store.state.corpId
+    if (!isLoggin || !corpCode || !corpId) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next() // 确保一定要调用 next()
+  }
+})
+// 登陆权限的设置
+
 // router.beforeEach((to, from, next) => {
-//   if (to.name !== 'login') {
-//     if (!store.state.CorpID || !store.state.corpCode || !store.state.authToken) {
-//       next({
-//         name: 'login',
-//         query: { redirect: to.fullPath }
-//       })
-//     } else {
-//       try {
-//         getService()
-//           .then(() => {
-//             next()
-//           })
-//       } catch (e) {
-//         alert('获取服务失败！')
+//   checkModuleAuth(to.meta.moduleId)
+//     .then(res => {
+//       debugger
+//       if (res) {
+//         console.log(res)
+//         next()
+//       } else {
+//         // this.$vux.toast.show({
+//         //   text: '您无权访问此模块'
+//         // })
 //       }
-//     }
-//   }
-// })
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     // this route requires auth, check if logged in
-//     // if not, redirect to login page.
-//     let isLoginIn = !!store.state.authToken
-//     if (!isLoginIn) {
-//       next({
-//         path: '/login',
-//         query: { redirect: to.fullPath }
-//       })
-//     } else {
-//       next()
-//     }
-//   } else {
-//     next() // 确保一定要调用 next()
-//   }
+//     })
 // })
 
-// // 全局路由守卫
-// router.beforeEach((to, from, next) => {
-//   // to: Route 即将要进入的目标，路由对象
-//   // from: Route 当前导航正要离开的路由
-//   // next： Function：一定要调用该方法来resolve这个钩子，执行效果依赖next方法的调用参数
-//   let isLoginIn = store.state.authToken
-//   // const nextRoute = ['home', 'good-list', 'good-detail', 'cart', 'profile'];
-//   if (to.fullPath.indexOf(to.name) >= 0) { // 未登录状态
-//     if (!isLoginIn) {
-//       console.log('what fuck')
-//       router.push({ name: 'login' })
-//     }
-//   }
-//   if (to.name === 'login') { // 当页面到达login页面时，已登陆状态
-//     if (isLoginIn) {
-//       console.log('已经登陆')
-//       router.push({ name: 'home' })
-//     }
-//   }
-//   next()
-// })
 export default router

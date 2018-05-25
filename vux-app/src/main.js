@@ -32,7 +32,6 @@ import {
 Vue.use(Loading)
 Vue.use(Toastplugins)
 Vue.use(FirstPlugins)
-
 Vue.use(DevicePlugin)
 Vue.use(ToastPlugin)
 Vue.use(AjaxPlugin)

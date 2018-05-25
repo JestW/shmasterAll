@@ -3,11 +3,16 @@
     <div v-transfer-dom>
       <loading :show="isLoading" text=""></loading>
     </div>
+    <div>
+      <popup v-model="topToast.show" position="top">
+        <p>topToast.message</p>
+      </popup>
+    </div>
     <router-view class="router-view"/>
   </div>
 </template>
 <script>
-import { Loading, TransferDom } from 'vux'
+import { Loading, TransferDom, Popup } from 'vux'
 // import store from './store'
 import { mapState } from 'vuex'
 export default {
@@ -16,11 +21,12 @@ export default {
     TransferDom
   },
   components: {
-    Loading
+    Loading,
+    Popup
   },
   data () {
     return {
-      // drawerVisible: false
+      topToast: {'show': true}
     }
   },
   computed: {

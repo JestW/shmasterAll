@@ -13,6 +13,7 @@ const state = {
   uid: storage.get('UID') || '',
   corpId: storage.get('CORP_ID') || '',
   corpName: storage.get('CORP_NAME') || '',
+  authModuleList: [],
   authToken: storage.get('AUTH_TOKEN') || ''
 }
 const store = new Vuex.Store({

@@ -1,6 +1,5 @@
 import ajax from '../../net/ajax'
 import storage from '../../storage'
-
 const work = {
   namespaced: true,
   state () {

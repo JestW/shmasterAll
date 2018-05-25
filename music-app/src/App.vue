@@ -12,7 +12,7 @@
     </tab>
     <!--keep-alive 防止每次进去都会请求一遍请求-->
     <keep-alive>
-      <router-view/>
+      <router-view  style="color:#fff"/>
     </keep-alive>
   </div>
 </template>
